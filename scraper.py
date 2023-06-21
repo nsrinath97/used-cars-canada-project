@@ -28,12 +28,12 @@ def get_posts(url, page='0'):
                                                             # TODO find another way to deal with having no posts on the day
         return
     
+    prices = bs4_doc.find_all('span', class_='priceinfo')
+    
     # Create a list of all the post links
     posts_list = []
     for post in posts:
-        link = post.get('href')
-        posts_list.append(link)
-
+        posts_list.append(post.get('href'))
 
     num_posts = bs4_doc.find('span', class_='cl-page-number').text                              # Total number of posts
     num_pages = math.ceil(int(''.join(re.findall(r'\d+', num_posts.split(' ')[-1]))) / 120)     # Total number of pages
@@ -59,23 +59,30 @@ def scrape_post(url):
 
     bs4_doc = get_page(url)
     
-    attrs = bs4_doc.find_all('p', class_='attrgroup')
-    desc = bs4_doc.find('section', id='postingbody')
-    
-    title = attrs[0].text.split('\n')
+    attrs = bs4_doc.find_all('p', class_='attrgroup')           # Grab all of the vehicle attributes in the post
+
+    title = attrs[0].text.split('\n')                           # vehicle name    
     title = [i for i in title if i.strip()]
     title = ''.join(["Vehicle Name: "] + title)
 
-    attrs_list = attrs[1].text.split('\n')
-    attrs_list = [i for i in attrs_list if i.strip()]
-    post_description = desc.text.replace('\n', ' ')
+    price = bs4_doc.find('span', class_='price')                # vehicle price
+    vehicle_price = 'vehicle price: ' + price
 
-    posting_details = title + attrs_list + [url] + [post_description]
+    attrs_list = attrs[1].text.split('\n')                      # Other attributes (cylinders, size, color etc.)    
+    attrs_list = [i for i in attrs_list if i.strip()]
+
+    posting_url = 'post link: ' + url                           # link to the craigslist post
+
+    desc = bs4_doc.find('section', id='postingbody')            # body of the craigslist post
+    post_description = desc.text.replace('\n', ' ')
+    post_description = 'description: ' + post_description
+
+    posting_details = title + [vehicle_price] + attrs_list + [posting_url] + [post_description]    # Put it all together in one list
 
     keys = []
     values = []
-    for attr in posting_details:
-        attr = attr.split(':')
+    for attr in posting_details:                    # Convert that list into a dictionary
+        attr = attr.split(': ', 1)
         keys.append(attr[0])
         values.append(attr[1])
     
