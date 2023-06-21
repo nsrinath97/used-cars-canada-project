@@ -17,18 +17,15 @@ def get_page(url):
 
 
 
-def get_posts(url, page='0'):
+def get_posts(url):
     """Get an individual link for each car ad posted on the day"""
-
-    url = url + page            # Get the first page 
+ 
     bs4_doc = get_page(url)
 
-    posts = bs4_doc.find_all('a', class_='titlestring')     # Find all posts on the page
+    posts = bs4_doc.find_all('a', class_='cl-app-anchor text-only posting-title')     # Find all posts on the page
     if not posts:                                           # If there are no posts, return none for now
                                                             # TODO find another way to deal with having no posts on the day
         return
-    
-    prices = bs4_doc.find_all('span', class_='priceinfo')
     
     # Create a list of all the post links
     posts_list = []
@@ -42,7 +39,7 @@ def get_posts(url, page='0'):
             page = i
             url = url[:-3] + page + url[-2:] 
             bs4_doc = get_page(url)
-            posts = bs4_doc.find_all('a', class_='titlestring')
+            posts = bs4_doc.find_all('a', class_='cl-app-anchor text-only posting-title')
             
             for post in posts:
                 link = post.get('href')
@@ -63,21 +60,21 @@ def scrape_post(url):
 
     title = attrs[0].text.split('\n')                           # vehicle name    
     title = [i for i in title if i.strip()]
-    title = ''.join(["Vehicle Name: "] + title)
+    title = [''.join(["Vehicle Name: "] + title)]
 
     price = bs4_doc.find('span', class_='price')                # vehicle price
-    vehicle_price = 'vehicle price: ' + price
+    vehicle_price = ['vehicle price: ' + price.text]
 
     attrs_list = attrs[1].text.split('\n')                      # Other attributes (cylinders, size, color etc.)    
     attrs_list = [i for i in attrs_list if i.strip()]
 
-    posting_url = 'post link: ' + url                           # link to the craigslist post
+    posting_url = ['post link: ' + url]                          # link to the craigslist post
 
     desc = bs4_doc.find('section', id='postingbody')            # body of the craigslist post
     post_description = desc.text.replace('\n', ' ')
-    post_description = 'description: ' + post_description
+    post_description = ['description: ' + post_description]
 
-    posting_details = title + [vehicle_price] + attrs_list + [posting_url] + [post_description]    # Put it all together in one list
+    posting_details = title + vehicle_price + attrs_list + posting_url + post_description    # Put it all together in one list
 
     keys = []
     values = []
