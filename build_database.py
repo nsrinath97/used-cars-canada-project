@@ -9,10 +9,8 @@ def build_db_content():
     db_content = []
     for url in post_urls:
         post_details = scrape_post(url)
-        print(post_details)
         db_content.append(post_details)
 
     return db_content
 
 used_cars_database = build_db_content()
-print(used_cars_database)

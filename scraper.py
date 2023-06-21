@@ -56,7 +56,7 @@ def scrape_post(url):
 
     bs4_doc = get_page(url)
     
-    attrs = bs4_doc.find_all('p', class_='attrgroup')           # Grab all of the vehicle attributes in the post
+    attrs = bs4_doc.find_all('p', class_='attrgroup')           # Grab all the vehicle attributes in the post
 
     title = attrs[0].text.split('\n')                           # vehicle name    
     title = [i for i in title if i.strip()]
@@ -67,6 +67,10 @@ def scrape_post(url):
 
     attrs_list = attrs[1].text.split('\n')                      # Other attributes (cylinders, size, color etc.)    
     attrs_list = [i for i in attrs_list if i.strip()]
+    attrs_list = ['delivery: available' if i == 'delivery available' else i for i in attrs_list]   # if delivery is available, then replace the phrase with something easier to put in dict
+    attrs_list = ['cryptocurrency: ok' if i == 'cryptocurrency ok' else i for i in attrs_list]     # same as above but cryptocurrency
+    attrs_list = ['odometer: broken' if i == 'odometer broken' else i for i in attrs_list]
+    attrs_list = ['odometer: rolled over' if i == 'odometer rolled over' else i for i in attrs_list]
 
     posting_url = ['post link: ' + url]                          # link to the craigslist post
 
