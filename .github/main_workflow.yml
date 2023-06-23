@@ -1,0 +1,5 @@
+- name: Run export
+  env:
+      MONGO_DB_PASS: ${{ secrets.MONGO_DB_PASS }}
+  run: 
+      export_to_mongo_db

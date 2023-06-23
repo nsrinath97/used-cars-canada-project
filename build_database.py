@@ -13,5 +13,4 @@ def build_db_content():
 
     return db_content
 
-used_cars_database = build_db_content()
-print(used_cars_database)
+
