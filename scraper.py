@@ -67,7 +67,11 @@ def scrape_post(url):
     vehicle_price = ['vehicle price: ' + price.text]
 
     posting_location = price.find_next_siblings()
-    posting_location = ['city: ' + posting_location[0].text[2:-5]]
+    try:
+        posting_location = ['city: ' + posting_location[0].text]
+    except:
+        print(url)
+
 
     attrs_list = attrs[1].text.split('\n')                      # Other attributes (cylinders, size, color etc.)    
     attrs_list = [i for i in attrs_list if i.strip()]
