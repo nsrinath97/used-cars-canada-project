@@ -7,9 +7,13 @@ def build_db_content():
 
     post_urls = get_posts(cl_url)
     db_content = []
+    i = 0
     for url in post_urls:
         post_details = scrape_post(url)
         db_content.append(post_details)
+        i += 1
+        print(str(i) + '/' + str(len(post_urls)) + ' posts scraped')
+
 
     return db_content
 

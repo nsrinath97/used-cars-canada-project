@@ -23,7 +23,7 @@ def get_posts(url):
  
     bs4_doc = get_page(url)
 
-    posts = bs4_doc.find_all('a', class_='cl-app-anchor text-only posting-vehicle_name')     # Find all posts on the page
+    posts = bs4_doc.find_all('a', class_='cl-app-anchor text-only posting-title')     # Find all posts on the page
     if not posts:                                           # If there are no posts, return none for now
                                                             # TODO find another way to deal with having no posts on the day
         return
