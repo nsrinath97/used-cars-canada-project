@@ -13,6 +13,7 @@ def get_page(url):
     time.sleep(3)                               # delay so the page can load
     page_html = driver.page_source              # Grab the HTML
     bs4_doc = bs(page_html, 'html.parser')      # Parse the HTML
+    driver.quit()
     return bs4_doc
 
 
@@ -22,7 +23,7 @@ def get_posts(url):
  
     bs4_doc = get_page(url)
 
-    posts = bs4_doc.find_all('a', class_='cl-app-anchor text-only posting-title')     # Find all posts on the page
+    posts = bs4_doc.find_all('a', class_='cl-app-anchor text-only posting-vehicle_name')     # Find all posts on the page
     if not posts:                                           # If there are no posts, return none for now
                                                             # TODO find another way to deal with having no posts on the day
         return
@@ -39,7 +40,7 @@ def get_posts(url):
             page = i
             url = url[:-3] + page + url[-2:] 
             bs4_doc = get_page(url)
-            posts = bs4_doc.find_all('a', class_='cl-app-anchor text-only posting-title')
+            posts = bs4_doc.find_all('a', class_='cl-app-anchor text-only posting-vehicle_name')
             
             for post in posts:
                 link = post.get('href')
@@ -58,12 +59,15 @@ def scrape_post(url):
     
     attrs = bs4_doc.find_all('p', class_='attrgroup')           # Grab all the vehicle attributes in the post
 
-    title = attrs[0].text.split('\n')                           # vehicle name    
-    title = [i for i in title if i.strip()]
-    title = [''.join(["Vehicle Name: "] + title)]
+    vehicle_name = attrs[0].text.split('\n')                           # vehicle name    
+    vehicle_name = [i for i in vehicle_name if i.strip()]
+    vehicle_name = [''.join(["Vehicle Name: "] + vehicle_name)]
 
     price = bs4_doc.find('span', class_='price')                # vehicle price
     vehicle_price = ['vehicle price: ' + price.text]
+
+    posting_location = price.find_next_siblings()
+    posting_location = ['city: ' + posting_location[0].text[2:-5]]
 
     attrs_list = attrs[1].text.split('\n')                      # Other attributes (cylinders, size, color etc.)    
     attrs_list = [i for i in attrs_list if i.strip()]
@@ -78,7 +82,7 @@ def scrape_post(url):
     post_description = desc.text.replace('\n', ' ')
     post_description = ['description: ' + post_description]
 
-    posting_details = title + vehicle_price + attrs_list + posting_url + post_description    # Put it all together in one list
+    posting_details = vehicle_name + vehicle_price + posting_location + attrs_list + posting_url + post_description    # Put it all together in one list
 
     keys = []
     values = []
