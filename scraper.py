@@ -40,7 +40,7 @@ def get_posts(url):
             page = i
             url = url[:-3] + page + url[-2:] 
             bs4_doc = get_page(url)
-            posts = bs4_doc.find_all('a', class_='cl-app-anchor text-only posting-vehicle_name')
+            posts = bs4_doc.find_all('a', class_='cl-app-anchor text-only posting-title')
             
             for post in posts:
                 link = post.get('href')
