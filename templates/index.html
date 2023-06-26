@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Used Cars Vancouver</title>
-    <link rel="stylesheet" href="style.css" media="all">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" media="all">
 </head>
 <body>
     <main class="table">
@@ -37,7 +37,7 @@
                     {% for i in vehicles_table %}
                     <tr>
                         <td>{{ i['Vehicle Name'] }}</td>
-                        <td>{{ i['vehicle price'] }}</td>
+                        <td><strong> {{ i['vehicle price'] }} </strong></td>
                         <td>{{ i['city'] }}</td>
                         <td>{{ i['VIN'] }}</td>
                         <td>{{ i['condition'] }}</td>
@@ -50,8 +50,14 @@
                         <td>{{ i['title status'] }}</td>
                         <td>{{ i['transmission'] }}</td>
                         <td>{{ i['type'] }}</td>
-                        <td>{{ i['post link'] }}</td>
-                        <td>{{ i['description'] }}</td>
+                        <td> 
+                            <a href="{{ i['post link'] }}">Link</a>
+                        </td>
+                        <td>
+                            <div class="post-description">Hover for description
+                                <span class="tooltip-text" id="left">{{ i['description'] }}</span>
+                            </div>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
