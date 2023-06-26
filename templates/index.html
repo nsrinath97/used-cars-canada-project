@@ -1,9 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Used Cars Vancouver</title>
+    <link rel="stylesheet" href="./CSS/style.css"/>
 </head>
 <body>
-    <table>Main table</table>
+    <main class="table">
+        <section class="table_header">
+            <h1>Used Cars Vancouver</h1>
+        </section>
+        <section class="table_body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Model </th>
+                        <th> Price </th>
+                        <th> City </th>
+                        <th> VIN </th>
+                        <th> Condition</th>
+                        <th> Cylinders </th>
+                        <th> Drive </th>
+                        <th> Fuel </th>
+                        <th> Odometer </th>
+                        <th> Color </th>
+                        <th> Size </th>
+                        <th> Status </th>
+                        <th> Transmission </th>
+                        <th> Type </th>
+                        <th> Link </th>
+                        <th> Description </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in vehicles_table %}
+                    <tr>
+                        <td>{{ i['Vehicle Name'] }}</td>
+                        <td>{{ i['vehicle price'] }}</td>
+                        <td>{{ i['city'] }}</td>
+                        <td>{{ i['VIN'] }}</td>
+                        <td>{{ i['condition'] }}</td>
+                        <td>{{ i['cylinders'] }}</td>
+                        <td>{{ i['drive'] }}</td>
+                        <td>{{ i['fuel'] }}</td>
+                        <td>{{ i['odometer'] }}</td>
+                        <td>{{ i['paint color'] }}</td>
+                        <td>{{ i['size'] }}</td>
+                        <td>{{ i['title status'] }}</td>
+                        <td>{{ i['transmission'] }}</td>
+                        <td>{{ i['type'] }}</td>
+                        <td>{{ i['post link'] }}</td>
+                        <td>{{ i['description'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
 </body>
 </html>

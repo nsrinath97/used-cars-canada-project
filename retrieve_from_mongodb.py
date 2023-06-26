@@ -5,6 +5,8 @@ client = connect_to_mongo_db()
 db = client['used_cars']
 collection = db['posting_details']
 
-print(collection.find())
+table_rows = []
+for row in collection.find():
+    table_rows.append(row)
 
 client.close()
