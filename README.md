@@ -10,10 +10,12 @@ Task List:
 
 [x] Export the used car post data into the MongoDB collection
 
-[ ] Retrieve all of the data from the MongoDB collection
+[x] Retrieve all of the data from the MongoDB collection
 
-[ ] Create an HTML page using Flask
+[x] Create an HTML page using Flask
 
-[ ] Loop through the MongoDB data and display it as an HTML table
+[-] Loop through the MongoDB data and display it as an HTML table (Bugfixing this part currently)
 
-[ ] Add css styling and use Bootstrap to make the table responsive
+[ ] Add css styling to make the table responsive
+
+[ ] Host the website and code on AWS or other
