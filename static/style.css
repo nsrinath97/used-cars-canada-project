@@ -10,17 +10,20 @@
 body {
     min-height: 50vh;
     background: url(/static/images/table-bg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 main.table {
     width: 82vw;
     height: 90vh;
     background-color: #fff5;
-    backdrop-filter: blur(7px);
+    backdrop-filter: blur(8px);
     box-shadow: 0 .4rem .8rem #0005;
     border-radius: .8rem;
     overflow: scroll;
@@ -99,6 +102,9 @@ table, th, td {
     text-align: left;
     vertical-align: middle;
     padding-left: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-top:5px;
 }
 
 thead th {

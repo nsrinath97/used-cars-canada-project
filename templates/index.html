@@ -32,14 +32,14 @@
                         <th> Status </th>
                         <th> Transmission </th>
                         <th> Type </th>
-                        <th> Link </th>
-                        <th> Description </th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for i in vehicles_table %}
                     <tr>
-                        <td class="vehicle-attrs">{{ i['Vehicle Name'] }}</td>
+                        <td class="vehicle-attrs">
+                            <a class="post-link" href="{{ i['post link'] }}">{{ i['Vehicle Name'] }}</a>
+                        </td>
                         <td class="vehicle-attrs"><strong> {{ i['vehicle price'] }} </strong></td>
                         <td class="vehicle-attrs">{{ i['city'] }}</td>
                         <td class="vehicle-attrs">{{ i['condition'] }}</td>
@@ -52,12 +52,6 @@
                         <td class="vehicle-attrs">{{ i['title status'] }}</td>
                         <td class="vehicle-attrs">{{ i['transmission'] }}</td>
                         <td class="vehicle-attrs">{{ i['type'] }}</td>
-                        <td class="vehicle-attrs"> 
-                            <a class="post-link" href="{{ i['post link'] }}">Link</a>
-                        </td>
-                        <td class="vehicle-attrs">
-                            <div class="post-description" onclick="popupFunc()">Click for description
-                                <span class="popup-text" id="desc-popup">{{ i['description'] }}</span>
                             </div>
                         </td>
                     </tr>
@@ -66,7 +60,6 @@
             </table>
         </section>
     </main>
-    <script src="static/scripts/popup.js"></script>
     <script src="static/scripts/searchbox.js"></script>
 </body>
 </html>
