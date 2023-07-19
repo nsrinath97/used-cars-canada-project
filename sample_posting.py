@@ -1,3 +1,4 @@
+# a sample post to test out the html table
 sample_post = {
  'Vehicle Name': '2012 Honda Civic Sdn',
  'vehicle price': '$11,500',

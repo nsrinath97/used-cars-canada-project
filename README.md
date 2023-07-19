@@ -14,8 +14,10 @@ Task List:
 
 [x] Create an HTML page using Flask
 
-[-] Loop through the MongoDB data and display it as an HTML table (Bugfixing this part currently)
+[x] Loop through the MongoDB data and display it as an HTML table
 
-[ ] Add css styling to make the table responsive
+[x] Add css styling to make the table responsive
 
-[ ] Host the website and code on AWS or other
+[-] Automate webscraper using Github actions
+
+[ ] Host the website and code on AWS or other web hosting services
